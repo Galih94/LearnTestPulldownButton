@@ -5,7 +5,7 @@ final public class MainViewController: UIViewController {
     public var currentButtonTitleSelected: String?
     public override func viewDidLoad() {
         super.viewDidLoad()
-        configureButtonMenu(titles: ["button 1", "button 2"])
+        configureButtonMenu(titles: ["button 1", "button 2", "button 3"])
     }
     
     func configureButtonMenu(titles: [String]) {
