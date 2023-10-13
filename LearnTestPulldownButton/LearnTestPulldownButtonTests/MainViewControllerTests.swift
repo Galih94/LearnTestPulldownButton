@@ -18,6 +18,16 @@ final class MainViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.currentButtonTitleSelected, "button 1")
     }
     
+    // TODO: Tests how select second button
+    func test_selectButton_selectedSecondMenu_currentButtonTitleSelectedSecondTitle() {
+        let sut = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        // here need action to select second button after did load
+        
+        XCTAssertEqual(sut.currentButtonTitleSelected, "button 2")
+    }
+    
     //MARK: Helpers
     private func makeSUT(file: StaticString = #filePath,
                          line: UInt = #line) -> MainViewController {
