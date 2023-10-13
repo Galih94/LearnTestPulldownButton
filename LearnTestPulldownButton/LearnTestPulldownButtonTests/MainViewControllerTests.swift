@@ -19,11 +19,14 @@ final class MainViewControllerTests: XCTestCase {
     }
     
     // TODO: Tests how select second button
-    func test_selectButton_selectedSecondMenu_currentButtonTitleSelectedSecondTitle() {
+    func test_selectButton_selectedSecondMenu_currentButtonTitleSelectedSecondTitle() throws {
         let sut = makeSUT()
         
         sut.loadViewIfNeeded()
-        // here need action to select second button after did load
+        let menu = try XCTUnwrap(sut.pulldownButton.menu)
+        let secondItem = try XCTUnwrap(menu.children[1] as? UIAction)
+        
+        secondItem.execute()
         
         XCTAssertEqual(sut.currentButtonTitleSelected, "button 2")
     }
@@ -40,5 +43,15 @@ final class MainViewControllerTests: XCTestCase {
         addTeardownBlock { [weak instance] in
             XCTAssertNil(instance, "Instance should have beed deallocated, potential memory leak", file: file, line: line)
         }
+    }
+}
+
+extension UIAction {
+    typealias Handler = @convention(block) (UIAction) -> Void
+
+    func execute() {
+        guard let block = value(forKey: "handler") else { return }
+        let handler = unsafeBitCast(block as AnyObject, to: Handler.self)
+        handler(self)
     }
 }
